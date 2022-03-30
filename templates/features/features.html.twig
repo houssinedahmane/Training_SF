@@ -1,14 +1,36 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Features Page !{% endblock %}
-
-
+{% block title%} Liste des Articles{% endblock %}
 
 {% block body %}
+ {% if articles %}
+ <div class="container" >
+    <table id="articles" class="table"  style="border: medium solid #000000;width:70%; margin-left:auto;
+    margin-right:auto;margin-top:10%">
+      <thead>
+        <tr style="background-color: #D0E3FA;">
+          <th>Article</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for article in articles %}
+          <tr>
+            <td>{{ article }}</td>
+            <td> Voir plus </td>
+            <td>
+              
+              <a href="#">  <button style="background-color: lightgreen; height: 28px; width: 90px"> voir </button> </a>
+              <a href="#">  <button style="background-color: grey; height: 28px; width: 90px"> Modifier  </button> </a>
+              <a href="#">  <button style="background-color: red; height: 28px; width: 90px"> Supprimer </button> </a>
 
-
-
-<div class="container">
-<h1> Features Page </h1>
-</div>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+    <p>Aucun articles</p>
+  {% endif %} 
 {% endblock %}

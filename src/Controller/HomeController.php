@@ -15,7 +15,10 @@ class HomeController extends AbstractController
     }
     #[Route('/features', name: 'features')]
     public function features(){
-        return $this->render('features/features.html.twig');
+        $article = ['article1' , 'article2' ,'article3'];
+        return $this->render('features/features.html.twig', [
+            'articles' => $article
+        ]);
     }
     #[Route('/contact', name: 'contact')]
     public function contact(){
