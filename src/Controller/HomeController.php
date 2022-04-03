@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Article;
 use Symfony\Component\BrowserKit\Request;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
@@ -23,5 +25,19 @@ class HomeController extends AbstractController
     #[Route('/contact', name: 'contact')]
     public function contact(){
         return $this->render('contact/contact.html.twig');
+    }
+
+    #[Route('/features/save', name: 'save')]
+    public function save(ManagerRegistry $doctrine){
+        $entitymanager = $doctrine->getManager();
+        $article = new  Article();
+        $article->setNom('Python For beginner');
+        $article->setDescription('This Book for beginners who want to develop skills in python langage .. ');
+        $article-> setPrix(1000.0);
+
+        $entitymanager->persist($article);
+        $entitymanager->flush();
+
+        return new Response('Article est créer avec id'. $article->getId());
     }
 }
